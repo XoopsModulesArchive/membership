@@ -1,0 +1,38 @@
+<h1><{$smarty.const._MEM_AM_PACKAGESLIST_H1}></h1>
+<p><{$smarty.const._MEM_AM_PACKAGESLIST_P}></p>
+<div style="float:right;"><{$pagenav}></div>
+<form action="<{$php_self}>" method="post">
+<table>
+	<tr class="head">
+		<th><{$title_th}></th>
+		<th><{$weight_th}></th>
+		<th><{$price_th}></th>
+		<th><{$currency_th}></th>
+		<th><{$period_th}></th>
+		<th><{$period_text_th}></th>
+		<th><{$groups_th}></th>
+		<th><{$last_th}></th>
+		<th><{$purchases_th}></th>
+		<th><{$smarty.const._MEM_AM_TH_ACTIONS}></th>
+	</tr>
+	<{foreach item=package from=$packages}>
+	<tr class="<{cycle values="even,odd"}>">
+		<td align='center'><{$package.form.title}></td>
+		<td align='center'><{$package.form.weight}></td>
+		<td align='center'><{$package.form.price}></td>
+		<td align='center'><{$package.form.currency}></td>
+		<td align='center'><{$package.form.period}></td>
+		<td align='center'><{$package.form.period_text}></td>
+		<td align='center'><{$package.form.groups}></td>
+		<td align='right'><{$package.last_datetime}></td>
+		<td align='right'><{$package.purchases}></td>
+		<td align='center'><a href="<{$php_self}>?op=packages&fct=delete&pid=<{$package.pid}>"><{$smarty.const._DELETE}></a>&nbsp;|&nbsp;<a href="<{$php_self}>?op=packages&fct=edit&pid=<{$package.pid}>"><{$smarty.const._EDIT}></a><{$package.form.pid}></td>
+	</tr>
+	<{/foreach}>
+	<tr class="foot">
+		<td colspan="10"><input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>"/></td>
+	</tr>
+</table>
+<input type="hidden" name="op" value="packages"/>
+<input type="hidden" name="fct" value="save"/>
+</form>
