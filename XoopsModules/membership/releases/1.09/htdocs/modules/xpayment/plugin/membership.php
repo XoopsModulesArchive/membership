@@ -1,16 +1,16 @@
 <?php
 	function PaidMembershipHook($invoice) {
-
 		list($pid, $uid) = explode('|', $invoice->getVar('key'));
 		
 		$packages_handler =& xoops_getmodulehandler('packages', 'membership');	
 		$package = $packages_handler->get($pid);
 		
-		if ($uid>0) 
+		$member_handler =& xoops_gethandler('member');
+		if ($uid>0) {
 			foreach($package->getVar('groups') as $groupid) {
-				$sql = "INSERT INTO ".$GLOBALS['xoopsDB']->prefix('groups_users_link')." (groupid, uid) VALUE(".$groupid.",".$uid.")";
-				$GLOBALS['xoopsDB']->queryF($sql);
+				$member_handler->addUserToGroup($groupid, $uid);
 			}
+		}
 
 		$package->setVar('last', time());
 		$package->setVar('purchases', $package->getVar('purchases')+1);
@@ -24,7 +24,7 @@
 		$xoMod = $module_handler->getByDirname('membership');
 		$xoConfig = $config_handler->getConfigList($xoMod->getVar('mid'));
 			
-		if ($profile->getVar($xoConfig['profile_field'])==0||$profile->getVar($xoConfig['profile_field'])<time()) {
+		if ($profile->getVar($xoConfig['profile_field'])==0||$profile->getVar($xoConfig['profile_field'])<time()+3600) {
 			$profile->setVar($xoConfig['profile_field'], time()+($package->getVar('period')*$invoice->getVar('items')));
 		} else {
 			$profile->setVar($xoConfig['profile_field'], $profile->getVar($xoConfig['profile_field'])+($package->getVar('period')*$invoice->getVar('items')));
