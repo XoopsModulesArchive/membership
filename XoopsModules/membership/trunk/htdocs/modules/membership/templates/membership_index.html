@@ -1,0 +1,16 @@
+<h1><{$smarty.const._MEM_MN_INDEX_H1}></h1>
+<p><{$smarty.const._MEM_MN_INDEX_P}></p>
+<div style='float:right; clear:both;'><{$pagenav}></div>
+<{foreach item=package from=$packages}>
+<div style='border: 3px dash #000; margin-top:10px;'>
+<table width="100%">
+	<tr class="head">
+		<td colspan="2"><{$package.title}></td>
+	</tr>
+	<tr>
+		<td class="even" width="75%"><{$package.description}></td>
+		<td class="odd"><{include file="db:membership_item_xpayment.html" package=$package}></td>
+	</tr>
+</table>
+</div>
+<{/foreach}>

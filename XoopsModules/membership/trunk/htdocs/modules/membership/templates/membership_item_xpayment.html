@@ -1,0 +1,40 @@
+<form action="<{$xoops_url}>/modules/xpayment/" method="post">
+<!-- This is the header of the invoice -->
+<input type="hidden" name="op" value="createinvoice">
+<input type="hidden" name="plugin" value="membership">
+<input type="hidden" name="drawfor" value="<{$xoops_site_name}>"><br/>
+<{php}>
+if (is_object($GLOBALS['xoopsUser'])) { <{/php}>
+<label><{$smarty.const._MEM_MN_PACKAGE_YOURNAME}>&nbsp;<{$package.user.email}> (<{$package.user.uname}>)</label><br/>
+<label><{$smarty.const._MEM_MN_PACKAGE_YOUREMAIL}>&nbsp;<{$package.user.email}></label><br/>
+<input type="hidden" name="drawto" value="<{$package.user.email}> (<{$package.user.uname}>)">
+<input type="hidden" name="drawto_email" value="<{$package.user.email}>">
+<input type="hidden" name="key" value="<{$package.pid}>|<{$package.user.uid}>">
+<{php}> } else { <{/php}>
+<label><{$smarty.const._MEM_MN_PACKAGE_YOURNAME}>&nbsp;</label><input type="text" name="drawto" value="" size="15" maxlen="128"><br/>
+<label><{$smarty.const._MEM_MN_PACKAGE_YOUREMAIL}>&nbsp;</label><input type="text" name="drawto_email" value="" size="15" maxlen="128"><br/>
+<input type="hidden" name="key" value="<{$package.pid}>|0">
+<{php}> } <{/php}>
+<input type="hidden" name="currency" value="<{$package.currency}>">
+
+<input type="hidden" name="weight_unit" value="kgs">
+<!-- This is the item trail of the invoice -->
+
+<!-- Example Item A -->
+<input type="hidden" name="item[A][cat]" value="<{$smarty.const._MEM_MN_PACKAGE_CATALOGUE}>">
+<input type="hidden" name="item[A][name]" value="<{$package.title}>">
+<input type="hidden" name="item[A][amount]" value="<{$package.price}>">
+<label><{$smarty.const._MEM_MN_PACKAGE_PERIOD}>&nbsp;<strong><{$package.period_text}></strong></label><br/>
+<label><{$smarty.const._MEM_MN_PACKAGE_PRICE}>&nbsp;<strong><{$package.price}> <{$package.currency}></strong></label><br/>
+<label><{$smarty.const._MEM_MN_PACKAGE_QUANTITY}></label>
+<input type="text" name="item[A][quantity]" value="1" size="4" maxlen="4"><br/>
+<input type="hidden" name="item[A][shipping]" value="0.00">
+<input type="hidden" name="item[A][handling]" value="0.00">
+<input type="hidden" name="item[A][weight]" value="0.00">
+<input type="hidden" name="item[A][tax]" value="0">
+
+<!-- This is the footer of the invoice -->
+<input type="hidden" name="return" value="<{$xoops_url}>/modules/adslight/viewads.php?lid=<{$lid}>">
+<input type="hidden" name="cancel" value="<{$xoops_url}>/modules/adslight/viewads.php?lid=<{$lid}>">
+<input type="submit" name='submit' value="<{$smarty.const._MEM_MN_PACKAGE_PURCHASE}>" />
+</form>

@@ -1,0 +1,12 @@
+Version 1.09 STABLE
+-------------------
+ - changed admin/header.php Support for XOOPS 2.5 GUI (wishcraft)
+ - changed admin/index.php Support for XOOPS 2.5 GUI, Dashboard & About added (wishcraft)
+ - changed admin/menu.php Dashboard & About added (wishcraft)
+ - changed class/packages.php Changed `description` to XOBJ_DTYPE_OTHER (wishcraft)
+ - changed language/english/modinfo.php Preloader/Cron added to preferences (wishcraft)
+ - changed language/english/admin.php Dashboard & About added  (wishcraft)
+ - changed xoops_version.php XOOPS 2.5 Gui Variables, system menu, Cron Type & Interval preferences  (wishcraft)
+ - added preloads/core.php Preload firing of Cron Added  (wishcraft) 
+ - added docs/changelog.txt Change log Added  (wishcraft)
+ - added docs/licence.txt Licence Added  (wishcraft)
